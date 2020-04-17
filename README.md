@@ -3,7 +3,7 @@
 [![license](http://img.shields.io/badge/license-CC0%201.0%20Universal-blue.svg)](https://github.com/moqui/PopCommerce/blob/master/LICENSE.md)
 [![build](https://travis-ci.org/moqui/PopCommerce.svg)](https://travis-ci.org/moqui/PopCommerce)
 [![release](http://img.shields.io/github/release/moqui/PopCommerce.svg)](https://github.com/moqui/PopCommerce/releases)
-[![commits since release](http://img.shields.io/github/commits-since/moqui/PopCommerce/v2.0.0.svg)](https://github.com/moqui/PopCommerce/commits/master)
+[![commits since release](http://img.shields.io/github/commits-since/moqui/PopCommerce/v2.1.2.svg)](https://github.com/moqui/PopCommerce/commits/master)
 [![downloads](http://img.shields.io/github/downloads/moqui/PopCommerce/total.svg)](https://github.com/moqui/PopCommerce/releases)
 
 [![LinkedIn Group](https://img.shields.io/badge/linked%20in%20group-moqui-blue.svg)](https://www.linkedin.com/groups/4640689)
@@ -26,7 +26,7 @@ the SimpleScreens project.
 To run POP Commerce you need Moqui Framework, POP Commerce itself, and the components it depends on. Moqui supports a 
 few methods for setup and deployment as described in the documentation here:
 
-<http://www.moqui.org/framework/docs/RunDeploy.html>
+<http://www.moqui.org/docs/framework/Run+and+Deploy>
 
 The easiest way to try POP Commerce is with the binary distribution available on GitHub:
 
@@ -93,7 +93,7 @@ For the eCommerce application, in your browser go to:
 
 Or for the admin application go to:
 
-<http://localhost:8080/apps/PopcAdmin>
+<http://localhost:8080/vapps/PopcAdmin>
 
 Use the button in the lower-left corner of the screen login as John Doe.
 
@@ -112,8 +112,9 @@ Here are command line steps for initial checkout, setup, and run:
 Here are steps for a basic update (for development with clean out and rebuild of database):
 
     $ cd moqui
-    $ ./gradlew cleanAll gitPullAll load
+    $ ./gradlew cleanAll gitPullAll
+    $ ./gradlew load
     $ java -jar moqui.war
 
 To access the eCommerce app go to something like <http://localhost:8080/popc> in a web browser. To access the admin app 
-go to <http://localhost:8080/PopcAdmin>.
+go to <http://localhost:8080/vapps/PopcAdmin>.
