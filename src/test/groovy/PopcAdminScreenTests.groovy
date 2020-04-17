@@ -103,6 +103,8 @@ class PopcAdminScreenTests extends Specification {
 
         // Party
         "Party/EditParty?partyId=EX_JOHN_DOE" | ['john.doe@moqui.org', 'John']
+        "Party/PartyEmails?partyId=CustJqp" | ['joe@public.com', 'Order Placed']
+        "Party/FinancialInfo?partyId=CustJqp" | ['ZIRET', 'Invoice Payment', 'Placed', 'Payment Received']
 
         // Catalog
         "Catalog/Category/EditCategory?productCategoryId=DEMO_ONE" | ['Demo Category One']
@@ -112,7 +114,7 @@ class PopcAdminScreenTests extends Specification {
         "Catalog/Product/EditCategories?productId=DEMO_1_1" | ['Demo Category One', 'Catalog']
         "Catalog/Product/EditAssocs?productId=DEMO_1_1" | []
         "Catalog/Product/EditPrices?productId=DEMO_1_1" | ['ZiddlemanInc', '16.99']
-        "Catalog/Search?queryString=demo" | ['Demo Product One-One', 'Asset (Good)']
+        "Catalog/Search?queryString=demo one" | ['Demo Product One-One', 'Asset (Good)']
 
         // TODO: Feature and FeatureGroup, need to add demo data
 
@@ -133,22 +135,22 @@ class PopcAdminScreenTests extends Specification {
         "Facility/FacilityCalendar?facilityId=ZIRET_WH" | []
 
         // Asset
-        "Asset/AssetDetail?assetId=55400" | ['DEMO_1_1', 'ORG_ZIZI_RETAIL', 'Current: Available']
-        "Asset/AssetCalendar?assetId=55400" | []
+        "Asset/Asset/AssetDetail?assetId=55400" | ['DEMO_1_1', 'ORG_ZIZI_RETAIL', 'Available']
+        "Asset/Asset/AssetCalendar?assetId=55400" | []
 
         // Accounting/Invoice
         "Accounting/Invoice/FindInvoice?statusId_op=in&statusId=InvoiceReceived,InvoiceApproved&toPartyId=ORG_ZIZI_RETAIL" |
                 ['Ziddleman', 'Ziziwork Retail', 'Sales/Purchase']
-        "Accounting/Invoice/EditInvoice?invoiceId=55100" | ['Current: Approved', 'Unpaid $1,824.25', 'ORG_ZIZI_RETAIL']
+        "Accounting/Invoice/EditInvoice?invoiceId=55100" | ['Approved', 'Unpaid $1,824.25', 'ORG_ZIZI_RETAIL']
         "Accounting/Invoice/EditInvoice?invoiceId=55400" |
-                ['ORG_ZIZI_RETAIL', 'Current: Payment Sent', 'Applied Payments $23,830.00']
+                ['ORG_ZIZI_RETAIL', 'Payment Sent', 'Applied Payments $23,830.00']
         "Accounting/Invoice/EditInvoiceItems?invoiceId=55400" | ['Demo Product One-One', 'Shipping and Handling']
         "Accounting/Invoice/PrintInvoice?invoiceId=55400&renderMode=xsl-fo" |
                 ['1350 E. Flamingo Rd. #9876, Las Vegas, NV 89119-5263', 'Asset - Inventory']
 
         // Accounting/Payment
         "Accounting/Payment/EditPayment?paymentId=55400" |
-                ['ORG_ZIZI_RETAIL', 'Applied $24,000.00', 'Current: Delivered']
+                ['ORG_ZIZI_RETAIL', 'Applied $24,000.00', 'Delivered']
         "Accounting/Payment/PaymentCheck?paymentIds=55400&renderMode=xsl-fo" | ['Ziddleman',
                 'Twenty four thousand and 00/100', 'Picker Bot 2000']
         "Accounting/Payment/PaymentDetail?paymentIds=55400&renderMode=xsl-fo" |
@@ -156,12 +158,14 @@ class PopcAdminScreenTests extends Specification {
 
         // Accounting Other
         "Accounting/FinancialAccount/EditFinancialAccount?finAccountId=55700" |
-                ['Ziziwork Retail', 'Joe Public', 'Current: Active']
+                ['Ziziwork Retail', 'Joe Public', 'Active']
         "Accounting/FinancialAccount/FinancialAccountTrans?finAccountId=55700" |
                 ['Customer Service Credit', 'Ziziwork Retail ']
         "Accounting/Transaction/EditTransaction?acctgTransId=55700" |
                 ['Joe Public', '430000000', 'Customer Service Credits']
         "Accounting/GlAccount/EditGlAccount?glAccountId=110000000" | ['Cash and Equivalent Asset', 'Ziziwork Industries']
+        "Accounting/OrgSettings/AcctgPreference?partyId=ORG_ZIZI_RETAIL" |
+                ['Ziziwork Industries', 'Clone Accounting Settings']
 
         // Accounting/Reports
         // NOTE: these are designed to handle account masks of ###-###-### or even down to the 5 digit ###-##
@@ -172,19 +176,17 @@ class PopcAdminScreenTests extends Specification {
         "Accounting/Reports/CashFlowStatement?organizationPartyId=ORG_ZIZI_RETAIL&timePeriodIdList=55100&detail=true" |
                 ["Finished Good Inventory", "111-10"]
         "Accounting/Reports/RetainedEarningsStatement?organizationPartyId=ORG_ZIZI_RETAIL&timePeriodIdList=55100" |
-                ["Net Earnings", "ZIRET Fiscal"]
+                ["Net Earnings", "ZIRET F"]
         "Accounting/Reports/FinancialRatios?organizationPartyId=ORG_ZIZI_RETAIL&timePeriodIdList=55100" |
                 ["Total Assets", "Accounts Receivable"]
 
         "Accounting/Reports/PostedAmountSummary?organizationPartyId=ORG_ZIZI_RETAIL&dateRange_poffset=0&dateRange_period=Year" |
                 ["Accounts Payable", "Depreciation - Equipment"]
         "Accounting/Reports/PostedBalanceSummary?organizationPartyId=ORG_ZIZI_RETAIL&timePeriodId=55100" |
-                ["Customer Service Credits (Contra Revenue)", "Net Income"]
+                ["Customer Service Credits (Discounts and Write-downs)", "Net Income"]
 
         // Vendor
         "Party/EditParty?partyId=ORG_ZIZI_RETAIL" |
                 ['Ziziwork Retail', 'Internal', 'payment.biziwork.retail@test.com']
-        "Party/Accounting/AcctgPreference?partyId=ORG_ZIZI_RETAIL" |
-                ['Ziziwork Industries', 'Clone Accounting Settings']
     }
 }
